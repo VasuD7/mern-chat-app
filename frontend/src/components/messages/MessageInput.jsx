@@ -1,64 +1,61 @@
+import { useState } from "react";
 import { BsSend } from "react-icons/bs";
+import useSendMessage from "../../hooks/useSendMessage";
 
 const MessageInput = () => {
-  const handleSubmit = (e) => {
+  const [message, setMessage] = useState("");
+  const { loading, sendMessage } = useSendMessage();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Add your form submission logic here
-    console.log("Message sent!");
+    if (!message) return;
+    await sendMessage(message);
+    setMessage("");
   };
 
   return (
-    <form className="px-9 my-4" onSubmit={handleSubmit}>
-      <div className="w-full relative flex justify-center">
-        <label htmlFor="message-input" className="sr-only">
-          Message
-        </label>
+    <form className="px-4 my-3" onSubmit={handleSubmit}>
+      <div className="w-full relative">
         <input
-          id="message-input"
           type="text"
+          className="border text-sm rounded-lg block w-full p-2.5  bg-gray-700 border-gray-600 text-white"
           placeholder="Send a message"
-          className="input w-full max-w-xs text-sm border rounded-lg py-2 px-3 bg-gray-700 border-gray-600 text-white"
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
         />
         <button
           type="submit"
-          className="absolute inset-y-0 end-0 flex items-center  btn btn-primary pe-3"
+          className="absolute inset-y-0 end-0 flex items-center pe-3"
         >
-          <BsSend className="inline-block text-white" />
+          {loading ? (
+            <div className="loading loading-spinner"></div>
+          ) : (
+            <BsSend />
+          )}
         </button>
       </div>
     </form>
   );
 };
-
 export default MessageInput;
 
+// STARTER CODE SNIPPET
 // import { BsSend } from "react-icons/bs";
 
 // const MessageInput = () => {
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     // Add your form submission logic here
-//     console.log("Message sent!");
-//   };
-
-//   return (
-//     <form className="px-9 my-4" onSubmit={handleSubmit}>
-//       <div className="flex justify-center">
-//         <label htmlFor="message-input" className="sr-only">
-//           Message
-//         </label>
-//         <input
-//           id="message-input"
-//           type="text"
-//           placeholder="Send a message"
-//           className="input w-full max-w-xs text-sm border rounded-lg py-2 px-3 bg-gray-700 border-gray-600 text-white"
-//         />
-//         <button type="submit" className="btn btn-sm btn-primary ml-2 h-10">
-//           <BsSend className="inline-block text-white" />
-//         </button>
-//       </div>
-//     </form>
-//   );
+// 	return (
+// 		<form className='px-4 my-3'>
+// 			<div className='w-full'>
+// 				<input
+// 					type='text'
+// 					className='border text-sm rounded-lg block w-full p-2.5  bg-gray-700 border-gray-600 text-white'
+// 					placeholder='Send a message'
+// 				/>
+// 				<button type='submit' className='absolute inset-y-0 end-0 flex items-center pe-3'>
+// 					<BsSend />
+// 				</button>
+// 			</div>
+// 		</form>
+// 	);
 // };
-
 // export default MessageInput;

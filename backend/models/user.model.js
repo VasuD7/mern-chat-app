@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+
 const userSchema = new mongoose.Schema(
   {
     fullName: {
@@ -20,13 +21,15 @@ const userSchema = new mongoose.Schema(
       required: true,
       enum: ["male", "female"],
     },
-    profilePicture: {
+    profilePic: {
       type: String,
       default: "",
     },
+    // createdAt, updatedAt => Member since <createdAt>
   },
   { timestamps: true }
 );
 
 const User = mongoose.model("User", userSchema);
+
 export default User;
