@@ -1,6 +1,6 @@
 
 
-MERN Stack Project: Build and Deploy a Real Time Chat App | JWT, Socket.io
+MERN Stack Project:  Real Time Chat App | JWT, Socket.io
 Demo App
 
 visit here : https://mern-chat-prod-xbyc.onrender.com/ 
